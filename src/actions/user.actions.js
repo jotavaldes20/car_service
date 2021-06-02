@@ -12,9 +12,8 @@ export const userActions = {
 function login(username, password, from) {
   return (dispatch) => {
     dispatch(request({ username }));
-    //userService.login(username, password);
     userService.login(username, password).then(
-      (user) => {
+      user => {
         dispatch(success(user));
         history.push(from);
       },

@@ -91,8 +91,8 @@ export const SignIn = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log( form.username );
-    console.log( form.password );
+    //console.log( form.username );
+    //console.log( form.password );
     //resetForm();
     if (isFormValid()) {
       // obtener la URL de retorno del estado de la ubicación o por defecto a la página de inicio

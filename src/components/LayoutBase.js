@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -17,12 +17,19 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import { userActions } from "../actions";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -85,6 +92,16 @@ const LayoutBase=({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openPerfil = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -92,6 +109,10 @@ const LayoutBase=({ children }) => {
 
   function handleDrawerClose() {
     setOpen(false);
+  }
+  function CerrarSesion(){
+    localStorage.removeItem("user");
+    window.location.reload()
   }
 
   return (
@@ -115,9 +136,35 @@ const LayoutBase=({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap className={classes.title}>
             Car Service
           </Typography>
+          <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={openPerfil}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={CerrarSesion}>Cerrar Sesion</MenuItem>
+              </Menu>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -160,6 +207,9 @@ const LayoutBase=({ children }) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        {alert.message &&
+                        <div className={`alert ${alert.type}`}>{alert.message}</div>
+        }
         {children}
       </main>
     </div>
