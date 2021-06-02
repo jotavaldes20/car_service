@@ -20,7 +20,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { userActions } from "../actions";
+import { useDispatch } from "react-redux";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -89,6 +89,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LayoutBase=({ children }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -205,12 +206,10 @@ const LayoutBase=({ children }) => {
           ))}
         </List>
       </Drawer>
+
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {alert.message &&
-                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-        }
-        {children}
+        {children}        
       </main>
     </div>
   );

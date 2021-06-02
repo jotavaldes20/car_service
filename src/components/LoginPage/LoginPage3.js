@@ -2,8 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../actions";
-import useForm from '../../@fuse/hooks/useForm';
-import {Button, Card, CardContent, Checkbox, FormControl, FormControlLabel, TextField, Typography} from '@material-ui/core';
+import useForm from "../../@fuse/hooks/useForm";
+import {
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
@@ -80,7 +89,6 @@ export const SignIn = () => {
   function isFormValid() {
     return form.username.length > 0 && form.password.length > 0;
   }
-  const loggingIn = useSelector((state) => state.authentication.loggingIn);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -91,9 +99,6 @@ export const SignIn = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    //console.log( form.username );
-    //console.log( form.password );
-    //resetForm();
     if (isFormValid()) {
       // obtener la URL de retorno del estado de la ubicación o por defecto a la página de inicio
       const { from } = location.state || { from: { pathname: "/" } };
@@ -105,7 +110,7 @@ export const SignIn = () => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <FuseAnimate animation="transition.expandIn">
-        <Card className="w-full max-w-384">
+          <Card className="w-full max-w-384">
             <CardContent className="flex flex-col items-center justify-center p-32">
               <img className={classes.center} src={logo} alt="logo" />
               <Typography variant="h6" className="mt-16 mb-32" align="center">
@@ -139,15 +144,16 @@ export const SignIn = () => {
                   onChange={handleChange}
                 />
                 <FormControl>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="remember"
-                                checked={form.remember}
-                                onChange={handleChange}/>
-                        }
-                        label="Remember Me"
-                    />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="remember"
+                        checked={form.remember}
+                        onChange={handleChange}
+                      />
+                    }
+                    label="Remember Me"
+                  />
                 </FormControl>
                 <Button
                   type="submit"
