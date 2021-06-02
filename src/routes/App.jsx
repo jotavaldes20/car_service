@@ -29,7 +29,7 @@ const App=()=> {
                     <Route path="/login" component={LoginPage} />
                     
                     <LayoutBase>
-                    <PrivateRoute exact path="/" component={HomePage} />
+                    <PrivateRoute exact path="/" component={HomePage} />{/*Pagina por defecto */}
                     {/*<Route path="/register" component={RegisterPage} /> */}
                     <Redirect from="*" to="/" />
                     </LayoutBase>

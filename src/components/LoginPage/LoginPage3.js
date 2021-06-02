@@ -1,20 +1,17 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../actions";
+import useForm from '../../@fuse/hooks/useForm';
+import {Button, Card, CardContent, Checkbox, FormControl, FormControlLabel, TextField, Typography} from '@material-ui/core';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import background from "../../assets/img/carService2.jpg";
 import logo from "../../assets/img/carServiceLogo.png";
-import { Card, CardContent } from "@material-ui/core";
 import FuseAnimate from "../../@fuse/FuseAnimate/FuseAnimate";
 
 function Copyright() {
@@ -72,31 +69,61 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const classes = useStyles();
+export const SignIn = () => {
+  const classes = useStyles(); //ocupar estilos definidos con makeStyles
+  const { form, handleChange, resetForm } = useForm({
+    username: "",
+    password: "",
+    remember: true,
+  });
 
+  function isFormValid() {
+    return form.username.length > 0 && form.password.length > 0;
+  }
+  const loggingIn = useSelector((state) => state.authentication.loggingIn);
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  // reset login status
+  useEffect(() => {
+    dispatch(userActions.logout());
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log( form.username );
+    console.log( form.password );
+    //resetForm();
+    if (isFormValid()) {
+      // obtener la URL de retorno del estado de la ubicación o por defecto a la página de inicio
+      const { from } = location.state || { from: { pathname: "/" } };
+      dispatch(userActions.login(form.username, form.password, from));
+    }
+  }
   return (
     <Container component="main" className={classes.container} maxWidth="xl">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <FuseAnimate>
-          <Card className="w-full max-w-384">
+        <FuseAnimate animation="transition.expandIn">
+        <Card className="w-full max-w-384">
             <CardContent className="flex flex-col items-center justify-center p-32">
               <img className={classes.center} src={logo} alt="logo" />
               <Typography variant="h6" className="mt-16 mb-32" align="center">
-                Iniciar Sesion
+                Iniciar Sesión
               </Typography>
-              <form className={classes.form} noValidate>
+              <form className={classes.form} noValidate onSubmit={handleSubmit}>
                 <TextField
                   variant="outlined"
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
+                  id="username"
                   label="Usuario"
-                  name="email"
-                  autoComplete="email"
+                  name="username"
+                  autoComplete="username"
                   autoFocus
+                  value={form.username}
+                  onChange={handleChange}
                 />
                 <TextField
                   variant="outlined"
@@ -108,29 +135,39 @@ export default function SignIn() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  value={form.password}
+                  onChange={handleChange}
                 />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
+                <FormControl>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                name="remember"
+                                checked={form.remember}
+                                onChange={handleChange}/>
+                        }
+                        label="Remember Me"
+                    />
+                </FormControl>
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  disabled={!isFormValid()}
                 >
-                  Sign In
+                  Iniciar Sesión
                 </Button>
                 <Grid container>
                   <Grid item xs>
                     <Link href="#" variant="body2">
-                      Forgot password?
+                      ¿Se te olvidó tu contraseña?
                     </Link>
                   </Grid>
                   <Grid item>
                     <Link href="#" variant="body2">
-                      {"Don't have an account? Sign Up"}
+                      {"¿No tienes una cuenta? Registrate"}
                     </Link>
                   </Grid>
                 </Grid>
@@ -144,4 +181,5 @@ export default function SignIn() {
       </Container>
     </Container>
   );
-}
+};
+export default SignIn;
