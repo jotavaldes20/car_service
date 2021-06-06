@@ -14,12 +14,13 @@ function login(username, password, from) {
     dispatch(request({ username }));
     userService.login(username, password).then(
       user => {
-        dispatch(success(user));
+        dispatch(success(user));        
         history.push(from);
+        dispatch(alertActions.success("Usuario Logeado"));
       },
       (error) => {
-        dispatch(failure(error.toString()));
-        dispatch(alertActions.error(error.toString()));
+        dispatch(failure(error.error_message.toString()));
+        dispatch(alertActions.error(error.error_message.toString()));
       }
     );
   };
@@ -36,8 +37,16 @@ function login(username, password, from) {
 }
 
 function logout() {
-  userService.logout();
-  return { type: userConstants.LOGOUT };
+  return (dispatch) => {
+    userService.logout();
+    dispatch(logout());
+    dispatch(alertActions.info("Sesion Cerrada"));
+    
+  }
+  function logout() {
+    return { type: userConstants.LOGOUT };
+  }
+ 
 }
 
 function register(user) {
