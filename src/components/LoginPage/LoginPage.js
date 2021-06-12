@@ -1,149 +1,191 @@
-import React from 'react';
-import {Button, Card, CardContent, Checkbox, Divider, FormControl, FormControlLabel, TextField, Typography} from '@material-ui/core';
-import {darken} from '@material-ui/core/styles/colorManipulator';
-import {makeStyles} from '@material-ui/styles';
-import FuseAnimate from '../../@fuse/FuseAnimate/FuseAnimate';
-import useForm from '../../@fuse/hooks/useForm';
-import clsx from 'clsx';
-import {Link} from 'react-router-dom';
-import logo from '../../assets/img/fuse.svg'
-const useStyles = makeStyles(theme => ({
-     /*root: {
-        background: 'radial-gradient(' + darken(theme.palette.primary.dark, 0.5) + ' 0%, ' + theme.palette.primary.dark + ' 80%)',
-        color     : theme.palette.primary.contrastText
-    }*/
-    root:{}
-}));
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../actions";
+import useForm from "../../@fuse/hooks/useForm";
+import {
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import background from "../../assets/img/carService2.jpg";
+import logo from "../../assets/img/carServiceLogo.png";
+import FuseAnimate from "../../@fuse/FuseAnimate/FuseAnimate";
 
-function LoginPage()
-{
-    const classes = useStyles();
-
-    const {form, handleChange, resetForm} = useForm({
-        email   : '',
-        password: '',
-        remember: true
-    });
-
-    function isFormValid()
-    {
-        return (
-            form.email.length > 0 &&
-            form.password.length > 0
-        );
-    }
-
-    function handleSubmit(ev)
-    {
-        ev.preventDefault();
-        resetForm();
-    }
-
-    return (
-        <div className={clsx(classes.root, "flex flex-col flex-auto flex-shrink-0 items-center justify-center p-32")}>
-
-            <div className="flex flex-col items-center justify-center w-full">
-
-                <FuseAnimate animation="transition.expandIn">
-
-                    <Card className="w-full max-w-384">
-
-                        <CardContent className="flex flex-col items-center justify-center p-32">
-
-                            <img className="w-128 m-32" src={logo} alt="logo"/>
-
-                            <Typography variant="h6" className="mt-16 mb-32">LOGIN TO YOUR ACCOUNT</Typography>
-
-                            <form
-                                name="loginForm"
-                                noValidate
-                                className="flex flex-col justify-center w-full"
-                                onSubmit={handleSubmit}
-                            >
-
-                                <TextField
-                                    className="mb-16"
-                                    label="Email"
-                                    autoFocus
-                                    type="email"
-                                    name="email"
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                />
-
-                                <TextField
-                                    className="mb-16"
-                                    label="Password"
-                                    type="password"
-                                    name="password"
-                                    value={form.password}
-                                    onChange={handleChange}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                />
-
-                                <div className="flex items-center justify-between">
-
-                                    <FormControl>
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox
-                                                    name="remember"
-                                                    checked={form.remember}
-                                                    onChange={handleChange}/>
-                                            }
-                                            label="Remember Me"
-                                        />
-                                    </FormControl>
-
-                                    <Link className="font-medium" to="/pages/auth/forgot-password">
-                                        Forgot Password?
-                                    </Link>
-                                </div>
-
-                                <Button
-                                    variant="contained" color="primary"
-                                    className="w-224 mx-auto mt-16"
-                                    aria-label="LOG IN"
-                                    disabled={!isFormValid()}
-                                    type="submit"
-                                >
-                                    LOGIN
-                                </Button>
-
-                            </form>
-
-                            <div className="my-24 flex items-center justify-center">
-                                <Divider className="w-32"/>
-                                <span className="mx-8 font-bold">OR</span>
-                                <Divider className="w-32"/>
-                            </div>
-
-                            <Button variant="contained" color="secondary" size="small"
-                                    className="normal-case w-192 mb-8">
-                                Log in with Google
-                            </Button>
-
-                            <Button variant="contained" color="primary" size="small"
-                                    className="normal-case w-192">
-                                Log in with Facebook
-                            </Button>
-
-                            <div className="flex flex-col items-center justify-center pt-32 pb-24">
-                                <span className="font-medium">Don't have an account?</span>
-                                <Link className="font-medium" to="/pages/auth/register">Create an account</Link>
-                            </div>
-
-                        </CardContent>
-                    </Card>
-                </FuseAnimate>
-            </div>
-        </div>
-    );
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://www.rakidwam.cl" target="_blank">
+        RAKIDWAM Spa
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
 }
 
-export default LoginPage;
+const useStyles = makeStyles((theme) => ({
+  container: {
+    height: 800,
+    backgroundImage: `url(${background})`,
+    //backgroundImage: 'url(https://source.unsplash.com/1600x900/?parking)',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: `calc(100vw + 48px)`,
+    margin: -14,
+    padding: 25,
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  containerLogin: {
+    position: "relative",
+    borderRadius: "8px 8px 8px 8px",
+    backgroundColor: "white",
+    color: "black",
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  center: {
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+}));
+
+export const SignIn = () => {
+  const classes = useStyles(); //ocupar estilos definidos con makeStyles
+  const { form, handleChange, resetForm } = useForm({
+    username: "",
+    password: "",
+    remember: true,
+  });
+
+  function isFormValid() {
+    return form.username.length > 0 && form.password.length > 0;
+  }
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  //al entrar al login reset login status
+  useEffect(() => {
+      dispatch(userActions.logout());
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (isFormValid()) {
+      // obtener la URL de retorno del estado de la ubicación o por defecto a la página de inicio
+      const { from } = location.state || { from: { pathname: "/HomePage" } };
+      dispatch(userActions.login(form.username, form.password, from));
+    }
+  }
+  return (    
+    <Container component="main" className={classes.container} maxWidth="xl">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <FuseAnimate animation="transition.expandIn">
+          <Card className="w-full max-w-384">
+            <CardContent className="flex flex-col items-center justify-center p-32">
+              <img className={classes.center} src={logo} alt="logo" />
+              <Typography variant="h6" className="mt-16 mb-32" align="center">
+                Iniciar Sesión
+              </Typography>
+              <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Usuario"
+                  name="username"
+                  autoComplete="username"
+                  autoFocus
+                  value={form.username}
+                  onChange={handleChange}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Contraseña"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={form.password}
+                  onChange={handleChange}
+                />
+                <FormControl>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="remember"
+                        checked={form.remember}
+                        onChange={handleChange}
+                      />
+                    }
+                    label="Remember Me"
+                  />
+                </FormControl>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  disabled={!isFormValid()}
+                >
+                  Iniciar Sesión
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      ¿Se te olvidó tu contraseña?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="#" variant="body2">
+                      {"¿No tienes una cuenta? Registrate"}
+                    </Link>
+                  </Grid>
+                </Grid>
+              </form>
+              <Box mt={8}>
+                <Copyright />
+              </Box>
+            </CardContent>
+          </Card>
+        </FuseAnimate>
+      </Container>
+    </Container>
+  );
+};
+export default SignIn;

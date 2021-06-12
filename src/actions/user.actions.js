@@ -12,15 +12,16 @@ export const userActions = {
 function login(username, password, from) {
   return (dispatch) => {
     dispatch(request({ username }));
-    userService.login(username, password).then(
+    userService.login(username, password)
+    .then(
       user => {
         dispatch(success(user));        
         history.push(from);
         dispatch(alertActions.success("Usuario Logeado"));
       },
       (error) => {
-        dispatch(failure(error.error_message.toString()));
-        dispatch(alertActions.error(error.error_message.toString()));
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
       }
     );
   };
@@ -38,10 +39,11 @@ function login(username, password, from) {
 
 function logout() {
   return (dispatch) => {
-    userService.logout();
-    dispatch(logout());
-    dispatch(alertActions.info("Sesion Cerrada"));
-    
+      if(localStorage.getItem('user')){
+      dispatch(alertActions.info("Sesion Cerrada"));
+      userService.logout();      
+      dispatch(logout());     
+    }
   }
   function logout() {
     return { type: userConstants.LOGOUT };

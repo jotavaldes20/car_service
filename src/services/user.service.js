@@ -5,16 +5,11 @@ export const userService = {
   logout,
 };
 
-function login(username, password) {
-  var formData = new FormData();
-
-  formData.append("username", username);
-  formData.append("password", password);
+function login(username, password) { 
+  console.log(iniciar_sesion(username,password))
   return axios({
-    method: "post",
-    url: iniciar_sesion(),
-    data: formData,
-    headers: { "Content-Type": "multipart/form-data" },
+    method: "get",
+    url: iniciar_sesion(username,password),
   })
     .then((res) => {
       if (!res.statusText === "OK") {
@@ -33,8 +28,14 @@ function login(username, password) {
       }
     })
     .catch((err) => {
-      console.log(err.response.data);
-      return Promise.reject(err.response.data);
+      if(err.response){
+        //console.log(err.response.data.error_message);
+        return Promise.reject(err.response.data.error_message);
+      }else{
+        //console.log(err.toJSON().message);
+        return Promise.reject(err.toJSON().message);
+      }
+      
     });
 }
 
