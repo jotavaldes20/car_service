@@ -9,6 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import Tooltip from '@material-ui/core/Tooltip';
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -221,33 +222,49 @@ const MenuHeader = () => {
 
         <Divider />
         <List>
+        <Tooltip title="Home" placement="right-start" arrow> 
           <ListItem button key="home" component={Link} to="/HomePage">
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button key="TicketList" component={Link} to="/TicketList">
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <ListItemText primary="Ver Ticket Abiertos" />
-          </ListItem>
+            </Tooltip>
+            <Tooltip title="Nuevo Ticket" placement="right-start" arrow> 
           <ListItem button key="NewTicket" component={Link} to="/NewTicket">
             <ListItemIcon>
               <TicketIcon />
             </ListItemIcon>
             <ListItemText primary="Nuevo Ticket" />
           </ListItem>
+          </Tooltip>
+          <Tooltip title="Tickets Abiertos" placement="right-start" arrow> 
+          <ListItem button key="OpenTicket" component={Link} to="/OpenTicket">
+            <ListItemIcon>
+              <TicketIcon />
+            </ListItemIcon>
+            <ListItemText primary="Ticket Abiertos" />
+          </ListItem>
+          </Tooltip>
+            <Tooltip title="Lista Ticket" placement="right-start" arrow> 
+          <ListItem button key="TicketList" component={Link} to="/TicketList">
+            <ListItemIcon>
+              <ListIcon />
+            </ListItemIcon>
+            <ListItemText primary="Lista Tickets" />
+          </ListItem>
+          </Tooltip>
         </List>
         <Divider />
         <List>
-          <ListItem button key="logout" component={Link} to="/sing">
+        <Tooltip title="Cerrar Sesion" placement="right-start" arrow> 
+          <ListItem button key="logout"onClick={CerrarSesion}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
             <ListItemText primary="logout" />
           </ListItem>
+          </Tooltip>
         </List>
       </Drawer>
     </div>

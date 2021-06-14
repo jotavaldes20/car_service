@@ -1,5 +1,5 @@
 import React from 'react'
-import TicketListComponent from "../components/TicketList"
+import TicketListComponent from "../components/Ticket/TicketList"
 const TicketList = () => {
     <TicketListComponent />
 }

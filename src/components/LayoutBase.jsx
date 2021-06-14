@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { userActions } from "../actions";
-import Footer from "../components/Footer/footer.jsx";
-import MenuHeader from "../components/Menu/index"
+import Footer from "../components/Footer/footer";
+import MenuHeader from "../components/Menu/Menu"
 const drawerWidth = 240;
 const headerHeight = 120;
 const useStyles = makeStyles((theme) => ({

@@ -15,7 +15,8 @@ function login(username, password, from) {
     userService.login(username, password)
     .then(
       user => {
-        dispatch(success(user));        
+        dispatch(success(user));  
+        console.log("from: ",from)      
         history.push(from);
         dispatch(alertActions.success("Usuario Logeado"));
       },

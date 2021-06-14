@@ -9,7 +9,7 @@ import { history } from '../helpers';
 import { alertActions } from '../actions';
 import { PrivateRoute } from '../components';
 import HomePage from '../containers/HomePage';
-import LoginPage from '../components/LoginPage/LoginPage';
+import LoginPage from '../components/LoginPage/LoginPage.jsx';
 import LayoutBase from '../components/LayoutBase'
 //import { RegisterPage } from '../RegisterPage';
 import { ToastContainer, toast } from 'react-toastify';
@@ -96,13 +96,17 @@ const App = () => {
             <Mensajes message={message} variant={tipoMensaje} />
             <Router history={history}>
                 <Switch>                    
-                    <Route path="/login" component={LoginPage} />
-                    <LayoutBase>
+                        
+                        <PrivateRoute exact path="/" component={HomePage} />{/*Pagina por defecto */}
                         <PrivateRoute exact path="/HomePage" component={HomePage} />{/*Pagina por defecto */}
                         <PrivateRoute exact path="/TicketList" component={TicketList} />{/*Lista de ticket Abiertos */}
-                        {/*<Route path="/register" component={RegisterPage} /> */}                        
-                        <PrivateRoute from="*" component={NotFound} />
-                    </LayoutBase>
+                        {/*<Route path="/register" component={RegisterPage} /> */}
+                        <Route path="/login" component={LoginPage} />
+                        <PrivateRoute component={NotFound} /> 
+                        
+                          
+            
+                   
                 </Switch>
             </Router>
         </BrowserRouter>
