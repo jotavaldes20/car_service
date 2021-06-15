@@ -15,7 +15,7 @@ import LayoutBase from '../components/LayoutBase'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 //Mensajes
-import Mensajes from '../components/Mensajes'
+import Mensajes from '../components/Mensajes/Mensajes'
 import TicketList from '../containers/TicketList';
 import NotFound from '../components/NotFound/NotFound';
 
