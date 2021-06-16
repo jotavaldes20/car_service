@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
         },
     }
 }));
-const Mensajes = ({ message, variant }) => {
+const Mensajes = (props) => {
+    const { message, variant,openMensaje }=props;
     const classes = useStyles();
     const [openAlerta, setOpenAlerta] = useState(Boolean(variant)); 
     const abrirAlerta = () => {
@@ -25,7 +26,8 @@ const Mensajes = ({ message, variant }) => {
         setOpenAlerta(false);
     };
     const alert = useSelector(state => state.alert); 
-    return (
+    return ( 
+        openMensaje?      
         <div>
             {alert.message && console.log("alerta: ",alert)
             
@@ -43,6 +45,7 @@ const Mensajes = ({ message, variant }) => {
             </div >
             
         </div>
+        :""
     )
 }
 

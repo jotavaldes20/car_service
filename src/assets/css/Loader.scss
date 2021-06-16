@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro&display=swap);
+
+//Fonts
+$title-font: 'Oswald', sans-serif;
+$text-font: 'Source Sans Pro', sans-serif;
+
+//Colors
+$primary-color: #3f51b5;
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-text {
+  font-size: 21px;
+  font-family: $title-font;
+  color: $primary-color;
+}

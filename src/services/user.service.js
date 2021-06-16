@@ -1,5 +1,6 @@
-import { ApiConfigConstants as config, iniciar_sesion } from "../constants";
+import { iniciar_sesion } from "../constants";
 import axios from "axios";
+import { useLocalStorage } from "../custom-hooks/useLocalStorage";
 export const userService = {
   login,
   logout,
@@ -15,12 +16,11 @@ function login(username, password) {
       if (!res.statusText === "OK") {
         if (res.status !== 200) {
           logout();
-          window.location.reload(true);
+          window.location.reload();
         }
         const error = (res && res.error_message) || res.statusText;
         return Promise.reject(error);
       } else {
-        localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("user", JSON.stringify(res.data.user));
         sessionStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("token", JSON.stringify(res.data.token));

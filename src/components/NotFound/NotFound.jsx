@@ -3,7 +3,7 @@ import { Icon, Input, Paper, Typography } from '@material-ui/core';
 import FuseAnimate from "../../@fuse/FuseAnimate/FuseAnimate";
 import { Link } from 'react-router-dom';
 import NotFoundParking from "../../assets/img/parking_notFound.gif";
-import "../../assets/css/NotFound/NotFound.styles.scss"
+import "../../assets/css/NotFound.styles.scss"
 const NotFound = () => {
     return (
         <div className="not_found">

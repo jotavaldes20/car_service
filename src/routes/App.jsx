@@ -10,22 +10,27 @@ import { alertActions } from '../actions';
 import { PrivateRoute } from '../components';
 import HomePage from '../containers/HomePage';
 import LoginPage from '../components/LoginPage/LoginPage.jsx';
-import LayoutBase from '../components/LayoutBase'
 //import { RegisterPage } from '../RegisterPage';
+import ErrorIcon from '@material-ui/icons/Error'
+import SuccessIcon from '@material-ui/icons/CheckCircleOutline';
+import WarningIcon from '@material-ui/icons/Warning';
+import InfoIcon from '@material-ui/icons/Info';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 //Mensajes
 import Mensajes from '../components/Mensajes/Mensajes'
 import TicketList from '../containers/TicketList';
 import NotFound from '../components/NotFound/NotFound';
-
+import TicketsAbiertos from '../components/Ticket/TicketsAbiertos'
+import TicketsList from '../components/Ticket/TicketList'
 const App = () => {
-    const alert = useSelector(state => state.alert); 
-    const [tipoMensaje,setTipoMensaje]=useState("")
-    const [message,setMessage]=useState("")
+    const alert = useSelector(state => state.alert);
+    const [tipoMensaje, setTipoMensaje] = useState("success")
+    const [message, setMessage] = useState("prueba de mensaje in component")
+    const [openMensaje, setOpenMensaje] = useState(false)
     const dispatch = useDispatch();
     const notificacion_error = (msg) => {
-        toast.error(msg, {
+        toast.error(<div><ErrorIcon /> {msg}</div>, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -36,7 +41,7 @@ const App = () => {
         });
     }
     const notificacion_success = (msg) => {
-        toast.success(msg, {
+        toast.success(<div><SuccessIcon /> {msg}</div>, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -47,7 +52,7 @@ const App = () => {
         });
     }
     const notificacion_info = (msg) => {
-        toast.info(msg, {
+        toast.info(<div><InfoIcon /> {msg}</div>, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -57,28 +62,42 @@ const App = () => {
             progress: undefined,
         });
     }
-    useEffect(() => {      
+    const notificacion_warning = (msg) => {
+        toast.info(<div><WarningIcon /> {msg}</div>, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+    useEffect(() => {
         if (alert.message) {
-            if (alert.type==="alert-danger") {
-    
+            if (alert.type === "alert-danger") {
                 notificacion_error(alert.message)
+                /*setMessage("prueba de error")
+                setTipoMensaje("success")
+                setOpenMensaje(true)*/
             }
-            if (alert.type==="alert-success") {
+            if (alert.type === "alert-success") {
                 notificacion_success(alert.message)
             }
-            if(alert.type==="alert-info"){
+            if (alert.type === "alert-info") {
                 notificacion_info(alert.message)
             }
-        } 
+        }
     });
-    useEffect(() => {      
-        history.listen((location, action) => {            
+    useEffect(() => {
+        history.listen((location, action) => {
             // Limpiar alertas al cambiar de path
             dispatch(alertActions.clear());
-        });     
-    },[]);
-    
-   
+
+        });
+    }, []);
+
+
     return (
         <BrowserRouter>
             <CssBaseline />
@@ -92,21 +111,17 @@ const App = () => {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-            /> 
-            <Mensajes message={message} variant={tipoMensaje} />
+            />
+            <Mensajes message={message} variant={tipoMensaje} openMensaje={openMensaje} />
             <Router history={history}>
-                <Switch>                    
-                        
-                        <PrivateRoute exact path="/" component={HomePage} />{/*Pagina por defecto */}
-                        <PrivateRoute exact path="/HomePage" component={HomePage} />{/*Pagina por defecto */}
-                        <PrivateRoute exact path="/TicketList" component={TicketList} />{/*Lista de ticket Abiertos */}
-                        {/*<Route path="/register" component={RegisterPage} /> */}
-                        <Route path="/login" component={LoginPage} />
-                        <PrivateRoute component={NotFound} /> 
-                        
-                          
-            
-                   
+                <Switch>
+                    <PrivateRoute exact path="/" component={HomePage} />{/*Pagina por defecto */}
+                    <PrivateRoute exact path="/HomePage" component={HomePage} />{/*Pagina por defecto */}
+                    <PrivateRoute exact path="/TicketsAbiertos" component={TicketsAbiertos} />{/*Lista de ticket Abiertos */}
+                    <PrivateRoute exact path="/TicketList" component={TicketsList} />{/*Lista de ticket LIST */}
+                    {/*<Route path="/register" component={RegisterPage} /> */}
+                    <Route path="/login" component={LoginPage} />
+                    <PrivateRoute component={NotFound} />
                 </Switch>
             </Router>
         </BrowserRouter>

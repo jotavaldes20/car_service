@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
+    height:100,
   },
   drawerOpen: {
     width: drawerWidth,
@@ -212,18 +213,14 @@ const MenuHeader = () => {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
               <ChevronLeftIcon />
-            )}
           </IconButton>
         </div>
 
         <Divider />
         <List>
         <Tooltip title="Home" placement="right-start" arrow> 
-          <ListItem button key="home" component={Link} to="/HomePage">
+          <ListItem button key="home" component={Link} to="/HomePage" onClick={handleDrawerClose}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
@@ -231,7 +228,7 @@ const MenuHeader = () => {
           </ListItem>
             </Tooltip>
             <Tooltip title="Nuevo Ticket" placement="right-start" arrow> 
-          <ListItem button key="NewTicket" component={Link} to="/NewTicket">
+          <ListItem button key="NewTicket" component={Link} to="/NewTicket" onClick={handleDrawerClose}>
             <ListItemIcon>
               <TicketIcon />
             </ListItemIcon>
@@ -239,7 +236,7 @@ const MenuHeader = () => {
           </ListItem>
           </Tooltip>
           <Tooltip title="Tickets Abiertos" placement="right-start" arrow> 
-          <ListItem button key="OpenTicket" component={Link} to="/OpenTicket">
+          <ListItem button key="TicketsAbiertos" component={Link} to="/TicketsAbiertos" onClick={handleDrawerClose}>
             <ListItemIcon>
               <TicketIcon />
             </ListItemIcon>
@@ -247,7 +244,7 @@ const MenuHeader = () => {
           </ListItem>
           </Tooltip>
             <Tooltip title="Lista Ticket" placement="right-start" arrow> 
-          <ListItem button key="TicketList" component={Link} to="/TicketList">
+          <ListItem button key="TicketList" component={Link} to="/TicketList" onClick={handleDrawerClose}>
             <ListItemIcon>
               <ListIcon />
             </ListItemIcon>

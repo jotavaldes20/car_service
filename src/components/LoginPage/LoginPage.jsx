@@ -37,6 +37,9 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root:{
+    flexGrow: 1,
+  },
   container: {
     height: 800,
     backgroundImage: `url(${background})`,
@@ -105,7 +108,8 @@ export const SignIn = () => {
       dispatch(userActions.login(form.username, form.password, from));
     }
   }
-  return (    
+  return (  
+    <div className={classes.root}>
     <Container component="main" className={classes.container} maxWidth="xl">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -186,6 +190,7 @@ export const SignIn = () => {
         </FuseAnimate>
       </Container>
     </Container>
+    </div>  
   );
 };
 export default SignIn;

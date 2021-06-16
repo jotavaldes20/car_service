@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const TicketList = () => {
+const TicketsAbiertos = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const tickets = useSelector(state => state.tickets);
@@ -49,9 +49,8 @@ const TicketList = () => {
     useEffect(() => {
         console.log(user.empresa_id)
         var empresa_id = user.empresa_id
-        var user_id = user.user_id
         //const { from } = location.state || { from: { pathname: "/TicketsAbiertos" } };
-        dispatch(ticketActions.tickets_list(empresa_id,user_id));
+        dispatch(ticketActions.tickets_abiertos(empresa_id));
         console.log("tickets Abiertos", tickets)
     }, []);
     return (
@@ -87,4 +86,4 @@ const TicketList = () => {
 
 }
 
-export default TicketList;
+export default TicketsAbiertos;

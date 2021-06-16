@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexGrow: 1,
+    width: "100vw",
+	  height: "100vh",
   },
 
   toolbar: {

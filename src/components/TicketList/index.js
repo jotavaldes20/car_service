@@ -2,8 +2,8 @@ import React from 'react'
 import { DataGrid } from '@material-ui/data-grid';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
-import VerTicket from '../VerTicket'
-import CerrarTicket from '../CerrarTicket'
+import VerTicket from '../Ticket/VerTicket'
+import CerrarTicket from '../Ticket/CerrarTicket'
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },

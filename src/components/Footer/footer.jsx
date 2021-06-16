@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
-import '../../assets/css/footer/footer.styles.scss'
+import '../../assets/css/footer.styles.scss'
 const useStyles = makeStyles((theme) => ({
   appBar: {
     top: "auto",
