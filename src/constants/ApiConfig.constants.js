@@ -7,3 +7,4 @@ const base_url='http://127.0.0.1:8000/car_service/api_rest/'
 export const iniciar_sesion=(username,password)=>`${ base_url }iniciar_sesion/?username=${ username }&password=${ password }`
 export const tickets_abiertos_url=(empresa_id,token) =>`${ base_url }tickets_abiertos/?empresa_id=${ empresa_id }&token=${ token }`
 export const tickets_list_url=(empresa_id,user_id,token) =>`${ base_url }all_ticket/?empresa_id=${ empresa_id }&user_id=${ user_id }&token=${ token }`
+export const cambiar_patente_url=(empresa_id,patente,ticket_id,token) =>`${ base_url }editar_patente/?empresa_id=${ empresa_id }&nueva_patente=${ patente }&ticket_id=${ ticket_id }&token=${ token }`

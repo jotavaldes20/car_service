@@ -9,6 +9,7 @@ import CerrarTicket from '../Ticket/CerrarTicket'
 import { ticketActions } from "../../actions";
 import Loader from "../Loader/Loader"
 import CambiarPatente from "./CambiarPatente";
+import { useLocalStorage } from "../../custom-hooks/useLocalStorage";
 const columns = [
     { field: 'id', headerName: 'ID', width: 100, hide: true},
     { field: 'patente', headerName: 'Patente', width: 130 },
@@ -44,29 +45,29 @@ const useStyles = makeStyles((theme) => ({
 const TicketsAbiertos = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const tickets = useSelector(state => state.tickets);
+    const tickets_abiertos = useSelector(state => state.tickets_abiertos);
+    //tickets:const tickets=JSON.parse(localStorage.getItem('tickets'))
     const user = useSelector(state => state.authentication.user);
     useEffect(() => {
-        console.log(user.empresa_id)
         var empresa_id = user.empresa_id
         //const { from } = location.state || { from: { pathname: "/TicketsAbiertos" } };
         dispatch(ticketActions.tickets_abiertos(empresa_id));
-        console.log("tickets Abiertos", tickets)
     }, []);
     return (
         <div className={classes.root}>
             <Grid container spacing={0}>
                 <Grid item xs={12}>
                     <h3>Tickets Abiertos</h3>
-                    {tickets.loading && <Loader />}
+                    {tickets_abiertos.loading && <Loader />}
                 </Grid>
-                {tickets.items &&
+                {tickets_abiertos.items &&
                     <Grid item xs={12}>
                         <div style={{ display: 'flex', height: "100%", width: '100%' }}>
                             <div style={{ flexGrow: 1 }}>
-                                <DataGrid
-                                    rows={tickets.items}
+                                <DataGrid                                 
+                                    rows={tickets_abiertos.items}
                                     columns={columns}
+                                    getRowId={(row) => row.id}
                                     pageSize={10}
                                     autoHeight={true}
                                     disableColumnMenu 

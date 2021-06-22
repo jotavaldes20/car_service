@@ -6,7 +6,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import CerrarTicket from '../CerrarTicket'
 
-const VerTicket =  ({ id, patente, fecha_ingreso, num_ticket,abierto  }) => {
+const VerTicket =  ({ id, ...props  }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -16,6 +16,7 @@ const VerTicket =  ({ id, patente, fecha_ingreso, num_ticket,abierto  }) => {
     const handleClose = () => {
         setOpen(false);
     };
+    const {patente, fecha_ingreso, num_ticket,abierto}=props;
     const ticket = {patente:patente,fecha_ingreso:fecha_ingreso,num_ticket:num_ticket}
     return (
         <div>

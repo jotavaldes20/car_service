@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,10 +9,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import { green } from '@material-ui/core/colors';
 import InputMask from 'react-text-mask';
+import { ticketActions } from "../../actions";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -53,11 +54,14 @@ function TextMaskCustom(props) {
 TextMaskCustom.propTypes = {
     inputRef: PropTypes.func.isRequired,
 }
-const CambiarPatente = ({ id, patente, fecha_ingreso, num_ticket, abierto }) => {
+const CambiarPatente = ({ id, ...props }) => {
     const classes = useStyles();
     const valueRef = useRef('') //creating a refernce for TextField Component
     const [open, setOpen] = React.useState(false);
-
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.authentication.user);
+    const {empresa_id}=user;
+    const {patente, ticket_id}=props
     const handleOpen = () => {
         setOpen(!open);
     };
@@ -68,10 +72,9 @@ const CambiarPatente = ({ id, patente, fecha_ingreso, num_ticket, abierto }) => 
     function CambiarPatente(e) {
         e.preventDefault();
         if(!valueRef.current.value==""){
-            alert(valueRef.current.value)
+            dispatch(ticketActions.cambiar_patente(empresa_id,valueRef.current.value,id));
         }
-       
-        //dispatch(userActions.login(form.username, form.password, from));
+        
     }
 
     return (
@@ -91,9 +94,20 @@ const CambiarPatente = ({ id, patente, fecha_ingreso, num_ticket, abierto }) => 
                     <Paper className={classes.paper}>
                         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
 
-                            <DialogTitle id="simple-dialog-title">Cambiar Patente {patente}</DialogTitle>
+                            <DialogTitle id="simple-dialog-title">Cambiar Patente {patente}</DialogTitle>    
                             <DialogContent >
-                                <Input id="patente" label="Nueva Patente" variant="outlined" type="text" inputRef={valueRef} inputComponent={TextMaskCustom} inputProps={{min: 0, style: { textAlign: 'center' }}}  />
+                                <Input 
+                                    id="patente" 
+                                    label="Nueva Patente" 
+                                    variant="outlined" 
+                                    type="text" 
+                                    inputRef={valueRef} 
+                                    inputComponent={TextMaskCustom} 
+                                    inputProps={{min: 0, style: { textAlign: 'center' }}} 
+                                    fullWidth 
+                                    autoFocus
+                                    margin="dense"
+                                />
                                     <Button
                                         type="submit"
                                         fullWidth
@@ -105,6 +119,7 @@ const CambiarPatente = ({ id, patente, fecha_ingreso, num_ticket, abierto }) => 
                                         Cambiar Patente
                                 </Button>
                             </DialogContent>
+
                         </Dialog>
                     </Paper>
                 </Grid>
