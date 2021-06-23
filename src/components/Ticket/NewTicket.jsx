@@ -12,6 +12,7 @@ import { FormControl, InputLabel, OutlinedInput } from '@material-ui/core';
 import Loader from '../Loader/Loader';
 import { ticketActions } from "../../actions";
 import { Fragment } from 'react';
+import CerrarTicket from "./CerrarTicket"
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -51,6 +52,7 @@ const NewTicket = () => {
     const ingreso = useSelector(state => state.ingresar_patente);
     const {empresa_id,username}=useSelector(state => state.authentication.user);
     const [valueIngreso,setValueIngreso]=useState("")
+    const [patenteSalida,setpatenteSalida]=useState("")
     function IngresarPatente(e) {
         e.preventDefault();
         if(!valueRef.current.value==""){
@@ -58,7 +60,7 @@ const NewTicket = () => {
             console.log(ingreso)
             console.log(ingreso.success)
             if(ingreso.success){
-
+                //setear valor del input
             }            
         }
 
@@ -70,6 +72,10 @@ const NewTicket = () => {
             dispatch(ticketActions.cambiar_patente(empresa_id,valueRef.current.value,id));
         }*/
 
+    }
+    
+    function patenteSalidaChange(event){
+        setpatenteSalida(event.target.value)
     }
     useEffect(() => {
         dispatch(ticketActions.fetchState())
@@ -136,9 +142,11 @@ const NewTicket = () => {
                             fullWidth
                             margin="dense"
                             labelWidth={100}
+                            onChange={patenteSalidaChange}
                         />
                         <br/>
-                        <Button
+                        <CerrarTicket patente={patenteSalida}/>
+                        {/*<Button
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -147,7 +155,7 @@ const NewTicket = () => {
                             onClick={SacarPatente}
                         >
                             salida
-                                </Button>
+                                </Button>*/}
                         </FormControl>
                     </Paper>
                 </Grid>                

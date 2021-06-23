@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -57,7 +57,7 @@ TextMaskCustom.propTypes = {
 const CambiarPatente = ({ id, ...props }) => {
     const classes = useStyles();
     const valueRef = useRef('') //crear una referencia para el componente TextField
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.authentication.user);
     const {empresa_id}=user;

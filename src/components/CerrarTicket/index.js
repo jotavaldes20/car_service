@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MiAlerta from '@material-ui/lab/Alert';
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const CerrarTicket = ({ id, patente, fecha_ingreso, num_ticket }) => {
     const classes = useStyles();
-    const [openAlerta, setOpenAlerta] = React.useState(false);
+    const [openAlerta, setOpenAlerta] = useState(false);
     const abrirAlerta = () => {
         setOpenAlerta(!openAlerta);
     };

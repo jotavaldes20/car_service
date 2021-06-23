@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -7,7 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import CerrarTicket from '../CerrarTicket'
 
 const VerTicket =  ({ id, patente, fecha_ingreso, num_ticket,abierto  }) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(!open);

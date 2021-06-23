@@ -124,7 +124,7 @@ const MenuHeader = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openPerfil = Boolean(anchorEl);
 

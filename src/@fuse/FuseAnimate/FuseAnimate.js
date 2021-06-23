@@ -1,10 +1,10 @@
-import React from 'react';
+import React,{forwardRef,cloneElement,memo} from 'react';
 import PropTypes from 'prop-types';
 import {VelocityComponent} from 'velocity-react';
 import 'velocity-animate/velocity.ui';
 
-const FuseAnimate = React.forwardRef(function FuseAnimate(props, ref) {
-    const children = React.cloneElement(props.children, {
+const FuseAnimate = forwardRef(function FuseAnimate(props, ref) {
+    const children = cloneElement(props.children, {
         style: {
             ...props.children.style,
             visibility: 'hidden'
@@ -30,4 +30,4 @@ FuseAnimate.defaultProps = {
     setRef             : undefined
 };
 
-export default React.memo(FuseAnimate);
+export default memo(FuseAnimate);
