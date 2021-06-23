@@ -25,6 +25,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import TicketIcon from "@material-ui/icons/ConfirmationNumber";
 import ListIcon from "@material-ui/icons/List";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ConfigIcon from "@material-ui/icons/Build"
 import { userActions } from "../../actions";
 const drawerWidth = 240;
 const headerHeight = 120;
@@ -194,6 +195,7 @@ const MenuHeader = () => {
             onClose={handleClose}
           >
             <MenuItem onClick={CerrarSesion}>Cerrar Sesion</MenuItem>
+            <MenuItem key="CambiarEstacionamiento" component={Link} to="/CambiarEstacionamiento">Cambiar Estacionamiento</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -243,13 +245,21 @@ const MenuHeader = () => {
             <ListItemText primary="Ticket Abiertos" />
           </ListItem>
           </Tooltip>
-            <Tooltip title="Lista Ticket" placement="right-start" arrow> 
-          <ListItem button key="TicketList" component={Link} to="/TicketList" onClick={handleDrawerClose}>
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <ListItemText primary="Lista Tickets" />
-          </ListItem>
+          <Tooltip title="Lista Ticket" placement="right-start" arrow> 
+            <ListItem button key="TicketList" component={Link} to="/TicketList" onClick={handleDrawerClose}>
+              <ListItemIcon>
+                <ListIcon />
+              </ListItemIcon>
+              <ListItemText primary="Lista Tickets" />
+            </ListItem>
+          </Tooltip>
+          <Tooltip title="Parametrizar Estacionamiento" placement="right-start" arrow> 
+            <ListItem button key="ParametrizarEstacionamiento" component={Link} to="/ParametrizarEstacionamiento" onClick={handleDrawerClose}>
+              <ListItemIcon>
+                <ConfigIcon />
+              </ListItemIcon>
+              <ListItemText primary="Parametrizar Estacio..." />
+            </ListItem>
           </Tooltip>
         </List>
         <Divider />

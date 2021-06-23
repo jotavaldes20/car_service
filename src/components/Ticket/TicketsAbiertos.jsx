@@ -63,12 +63,12 @@ const TicketsAbiertos = () => {
                 {tickets_abiertos.items &&
                     <Grid item xs={12}>
                         <div style={{ display: 'flex', height: "100%", width: '100%' }}>
-                            <div style={{ flexGrow: 1 }}>
+                            <div style={{ flexGrow: 1}}>
                                 <DataGrid                                 
                                     rows={tickets_abiertos.items}
                                     columns={columns}
                                     getRowId={(row) => row.id}
-                                    pageSize={10}
+                                    pageSize={7}
                                     autoHeight={true}
                                     disableColumnMenu 
                                     components={{

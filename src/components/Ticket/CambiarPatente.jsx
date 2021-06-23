@@ -9,10 +9,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
 import { green } from '@material-ui/core/colors';
 import InputMask from 'react-text-mask';
 import { ticketActions } from "../../actions";
+import { FormControl, InputLabel, OutlinedInput } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -56,7 +56,7 @@ TextMaskCustom.propTypes = {
 }
 const CambiarPatente = ({ id, ...props }) => {
     const classes = useStyles();
-    const valueRef = useRef('') //creating a refernce for TextField Component
+    const valueRef = useRef('') //crear una referencia para el componente TextField
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.authentication.user);
@@ -96,7 +96,9 @@ const CambiarPatente = ({ id, ...props }) => {
 
                             <DialogTitle id="simple-dialog-title">Cambiar Patente {patente}</DialogTitle>    
                             <DialogContent >
-                                <Input 
+                            <FormControl fullWidth className={classes.margin} variant="outlined">
+                            <InputLabel htmlFor="nueva-patente">Nueva Patente</InputLabel>
+                            <OutlinedInput
                                     id="patente" 
                                     label="Nueva Patente" 
                                     variant="outlined" 
@@ -108,6 +110,7 @@ const CambiarPatente = ({ id, ...props }) => {
                                     autoFocus
                                     margin="dense"
                                 />
+
                                     <Button
                                         type="submit"
                                         fullWidth
@@ -118,6 +121,7 @@ const CambiarPatente = ({ id, ...props }) => {
                                     >
                                         Cambiar Patente
                                 </Button>
+                            </FormControl>
                             </DialogContent>
 
                         </Dialog>

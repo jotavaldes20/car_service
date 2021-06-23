@@ -8,3 +8,4 @@ export const iniciar_sesion=(username,password)=>`${ base_url }iniciar_sesion/?u
 export const tickets_abiertos_url=(empresa_id,token) =>`${ base_url }tickets_abiertos/?empresa_id=${ empresa_id }&token=${ token }`
 export const tickets_list_url=(empresa_id,user_id,token) =>`${ base_url }all_ticket/?empresa_id=${ empresa_id }&user_id=${ user_id }&token=${ token }`
 export const cambiar_patente_url=(empresa_id,patente,ticket_id,token) =>`${ base_url }editar_patente/?empresa_id=${ empresa_id }&nueva_patente=${ patente }&ticket_id=${ ticket_id }&token=${ token }`
+export const ingresar_patente_url=(empresa_id,patente,username,token) =>`${ base_url }nuevo_ticket/?empresa_id=${ empresa_id }&patente=${ patente }&username=${ username }&token=${ token }`

@@ -53,3 +53,31 @@ export function cambiar_patente(state = {}, action) {
       return state;
   }
 }
+const initialState = {
+  loading: false,
+  success: false,
+}
+export function ingresar_patente(state=initialState,action){
+  switch (action.type) {
+    case ticketConstants.INGRESAR_PATENTE_REQUEST:
+      return {
+        loading: true,
+        success: false,
+      };
+    case ticketConstants.INGRESAR_PATENTE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case ticketConstants.INGRESAR_PATENTE_FAILURE:
+      return {
+        error: action.error,
+      };
+    case 'FETCH_STATE':
+        return {
+            ...state, 
+        }
+    default:
+      return state;
+  }
+}

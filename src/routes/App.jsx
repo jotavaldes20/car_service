@@ -23,6 +23,7 @@ import TicketList from '../containers/TicketList';
 import NotFound from '../components/NotFound/NotFound';
 import TicketsAbiertos from '../components/Ticket/TicketsAbiertos'
 import TicketsList from '../components/Ticket/TicketList'
+import NewTicket from '../components/Ticket/NewTicket'
 const App = () => {
     const alert = useSelector(state => state.alert);
     const [tipoMensaje, setTipoMensaje] = useState("success")
@@ -119,6 +120,7 @@ const App = () => {
                     <PrivateRoute exact path="/HomePage" component={HomePage} />{/*Pagina por defecto */}
                     <PrivateRoute exact path="/TicketsAbiertos" component={TicketsAbiertos} />{/*Lista de ticket Abiertos */}
                     <PrivateRoute exact path="/TicketList" component={TicketsList} />{/*Lista de ticket LIST */}
+                    <PrivateRoute exact path="/NewTicket" component={NewTicket} />{/* New ticket and sacar ticket */}
                     {/*<Route path="/register" component={RegisterPage} /> */}
                     <Route path="/login" component={LoginPage} />
                     <PrivateRoute component={NotFound} />
