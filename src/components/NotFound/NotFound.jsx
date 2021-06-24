@@ -1,7 +1,4 @@
 import React from 'react';
-import { Icon, Input, Paper, Typography } from '@material-ui/core';
-import FuseAnimate from "../../@fuse/FuseAnimate/FuseAnimate";
-import { Link } from 'react-router-dom';
 import NotFoundParking from "../../assets/img/parking_notFound.gif";
 import "../../assets/css/NotFound.styles.scss"
 const NotFound = () => {

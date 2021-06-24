@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     top: "auto",
     bottom: 0,
     background: "#2E3B55",
-    maxHeight: 60,
+    maxHeight: 50,
   },
   Toolbar:{
     justifyContent: "center",

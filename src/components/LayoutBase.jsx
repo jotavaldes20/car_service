@@ -2,17 +2,26 @@ import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Footer from "../components/Footer/footer";
 import MenuHeader from "../components/Menu/Menu"
+import { Box, Container, Grid, Typography } from "@material-ui/core";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Link } from "react-router-dom";
 const drawerWidth = 240;
 const headerHeight = 120;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexGrow: 1,
-    width: "100vw",
-	  height: "100vh",
   },
-
-  toolbar: {
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  /*toolbar: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
@@ -22,19 +31,24 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-  },
+  },*/
 }));
-
 const LayoutBase = ({ children }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <MenuHeader />
       <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {children}
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={1}>
+            {children}
+          </Grid>
+          <Box pt={4}>
+            <Footer />
+          </Box>
+          </Container>
       </main>
-      <Footer />
     </div>
   );
 };

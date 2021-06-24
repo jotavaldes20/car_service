@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import CerrarTicket from '../CerrarTicket'
 
 const VerTicket =  ({ id, ...props  }) => {
     const [open, setOpen] = React.useState(false);
@@ -16,8 +16,7 @@ const VerTicket =  ({ id, ...props  }) => {
     const handleClose = () => {
         setOpen(false);
     };
-    const {patente, fecha_ingreso, num_ticket,abierto}=props;
-    const ticket = {patente:patente,fecha_ingreso:fecha_ingreso,num_ticket:num_ticket}
+    const {patente, fecha_ingreso, num_ticket,monto_cobrado}=props;
     return (
         <div>
             <Button variant="contained" color="primary" size="small"
@@ -33,21 +32,28 @@ const VerTicket =  ({ id, ...props  }) => {
                 <ListItem >
                     <p>Fecha de ingreso: {fecha_ingreso}</p>
                 </ListItem>
+                {num_ticket&&
                 <ListItem >
-                    <p>Num Ticket: {num_ticket}</p>
+                    <p>Num Ticket: {num_ticket}</p>                
                 </ListItem>
-                <ListItem >
-                    <p>cobro: $xxx.xxx</p>
-                </ListItem>
-                <ListItem >
-                    {abierto===1? <CerrarTicket key={id}{...ticket}  /> : ''}
-                </ListItem>
+                }
+                {monto_cobrado&&
+                    <ListItem >
+                    <p>cobro: $ {monto_cobrado}</p>
+                    </ListItem>
+                }
             </List>
             </Dialog>
         </div>
     );
 }
+// prototype: components documentation
+VerTicket.propTypes = {
+    patente: PropTypes.string.isRequired,
+    fecha_ingreso: PropTypes.string.isRequired,
+    num_ticket: PropTypes.number,
 
+};
 export default VerTicket;
 
 

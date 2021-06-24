@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types'; //para documentar Componente CerrarTicket
 import Button from '@material-ui/core/Button';
@@ -10,7 +10,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { red } from '@material-ui/core/colors';
-import InputMask from 'react-text-mask';
 import { ticketActions } from "../../actions";
 import { FormControl, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core';
 
@@ -38,9 +37,7 @@ const ColorButton = withStyles((theme) => ({
 
 const CerrarTicket = (props) => {
     const [open, setOpen] = useState(false);
-    const [montoPagar, setMontoPagar] = useState(0);
     const classes = useStyles();
-    //const [ticket_id, setTicket_id] = useState(0);
     const dispatch = useDispatch();
     const user = useSelector(state => state.authentication.user);
     const datos_tickets = useSelector(state => state.sacar_patente);

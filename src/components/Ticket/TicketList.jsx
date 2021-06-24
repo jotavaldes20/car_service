@@ -78,7 +78,7 @@ const TicketList = () => {
                                     rows={tickets.items}                                   
                                     columns={columns}
                                     getRowId={(row) => row.ticket_id}
-                                    pageSize={7}
+                                    pageSize={10}
                                     autoHeight={true}
                                     disableColumnMenu 
                                     components={{

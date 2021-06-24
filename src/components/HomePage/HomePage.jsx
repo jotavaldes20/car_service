@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import carServiceImg from "../../assets/img/solucion_app_carservice_verde.svg";
 import { useSelector } from 'react-redux';
-import { flexDirection } from '@material-ui/system';
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -32,7 +31,6 @@ const HomePage = () => {
     <div className={classes.root}>
       <Grid container
         spacing={3}
-        container
         direction="row"
         justify="center"
         alignItems="center" >
