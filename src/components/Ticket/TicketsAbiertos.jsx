@@ -46,11 +46,9 @@ const TicketsAbiertos = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const tickets_abiertos = useSelector(state => state.tickets_abiertos);
-    //tickets:const tickets=JSON.parse(localStorage.getItem('tickets'))
     const user = useSelector(state => state.authentication.user);
     useEffect(() => {
         var empresa_id = user.empresa_id
-        //const { from } = location.state || { from: { pathname: "/TicketsAbiertos" } };
         dispatch(ticketActions.tickets_abiertos(empresa_id));
     }, []);
     return (

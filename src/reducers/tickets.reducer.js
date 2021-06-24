@@ -81,3 +81,49 @@ export function ingresar_patente(state=initialState,action){
       return state;
   }
 }
+export function sacar_patente(state=initialState,action){
+  switch (action.type) {
+    case ticketConstants.SACAR_PATENTE_REQUEST:
+      return {
+        loading: true,
+        success: false,
+      };
+    case ticketConstants.SACAR_PATENTE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        item: action.tickets,
+      };
+    case ticketConstants.SACAR_PATENTE_FAILURE:
+      return {
+        error: action.error,
+      };
+    case 'FETCH_STATE_CERRAR_TICKET':
+        return {
+            ...state, 
+        }
+    default:
+      return state;
+  }
+}
+export function pagar(state=initialState,action){
+  switch (action.type) {
+    case ticketConstants.PAGAR_REQUEST:
+      return {
+        loading: true,
+        success: false,
+      };
+    case ticketConstants.PAGAR_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        item: action.tickets,
+      };
+    case ticketConstants.PAGAR_FAILURE:
+      return {
+        error: action.error,
+      };
+    default:
+      return state;
+  }
+}

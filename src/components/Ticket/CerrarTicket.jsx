@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; //para documentar Componente CerrarTicket
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -12,7 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import { red } from '@material-ui/core/colors';
 import InputMask from 'react-text-mask';
 import { ticketActions } from "../../actions";
-import { FormControl, InputLabel, OutlinedInput } from '@material-ui/core';
+import { FormControl, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -35,36 +36,38 @@ const ColorButton = withStyles((theme) => ({
     },
 }))(Button);
 
-const CerrarTicket = ({ id, ...props }) => {
-    const classes = useStyles();
-    const valueRef = useRef('') //crear una referencia para el componente TextField
+const CerrarTicket = (props) => {
     const [open, setOpen] = useState(false);
-    const [montoPagar, setMontoPagar] = useState(1000);
+    const [montoPagar, setMontoPagar] = useState(0);
+    const classes = useStyles();
+    //const [ticket_id, setTicket_id] = useState(0);
     const dispatch = useDispatch();
     const user = useSelector(state => state.authentication.user);
-    const {empresa_id}=user;
-    const {patente, ticket_id,fullWidthAttr}=props
-    const handleOpen = () => {
-        if(!patente==""){
+    const datos_tickets = useSelector(state => state.sacar_patente);
+    const { empresa_id,username,emisor_dte } = user;
+    const { patente } = props
+    useEffect(() => {
+        dispatch(ticketActions.fetchStateCerrarTicket())
+    }, []);
+
+    const handleOpen = (e) => {
+        e.preventDefault();
+        if (!patente == "") {
+            dispatch(ticketActions.sacar_patente(empresa_id, patente))
             setOpen(!open);
         }
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setOpen(!open);
+        //localStorage.removeItem("sacar_patente");
     };
-    function CerrarTicket(e) {
-        e.preventDefault();
-        if(!patente==""){
-            alert(patente)
-            //dispatch(ticketActions.cambiar_patente(empresa_id,valueRef.current.value,id));
-        }
-        else{
-            alert(patente)
-        }
-        
-    }
 
+    const pagar=(ticket_id)=>{
+        alert(ticket_id)
+        dispatch(ticketActions.pagar(empresa_id, ticket_id,username,emisor_dte))
+        setOpen(!open);
+    }
     return (
         <div className={classes.root}>
             <Grid container
@@ -73,51 +76,59 @@ const CerrarTicket = ({ id, ...props }) => {
                 alignItems="center"
                 justify="center"
             >
+
                 <Grid item xs={12}>
 
-                    <ColorButton variant="contained"  color="primary" size="small" fullWidth
+                    <ColorButton variant="contained" color="primary" size="small" fullWidth
                         style={{ marginLeft: 2 }} onClick={handleOpen} >
                         Cerrar Ticket
-                         </ColorButton>
-                    <Paper className={classes.paper}>
-                        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+                    </ColorButton>
+                    {datos_tickets.success &&
+                        <Paper className={classes.paper}>
+                            <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
 
-                            <DialogTitle id="simple-dialog-title">Monto pagar patente {patente}</DialogTitle>    
-                            <DialogContent >
-                            <FormControl fullWidth className={classes.margin} variant="outlined">
-                            <InputLabel htmlFor="nueva-patente">Monto Pagar</InputLabel>
-                            <OutlinedInput
-                                    id="patente" 
-                                    label="Nueva Patente" 
-                                    variant="outlined" 
-                                    type="text" 
-                                    value={montoPagar}
-                                    inputProps={{min: 0, style: { textAlign: 'center' }}} 
-                                    
-                                    autoFocus
-                                    disabled
-                                    margin="dense"
-                                />
+                                <DialogTitle id="simple-dialog-title">Monto pagar patente {patente}</DialogTitle>
+                                <DialogContent >
+                                    <FormControl fullWidth className={classes.margin} variant="outlined">
+                                        
+                                        <InputLabel htmlFor="nueva-patente">Monto Pagar</InputLabel>
+                                        <OutlinedInput
+                                            id="patente"
+                                            label="Nueva Patente"
+                                            variant="outlined"
+                                            type="text"
+                                            value={datos_tickets.item[0].monto_pagar}
+                                            inputProps={{ min: 0, style: { textAlign: 'center' } }}
+                                            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                            autoFocus
+                                            disabled
+                                            margin="dense"
+                                        />
 
-                                    <Button
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        color="primary"
-                                        className={classes.submit}
-                                        onClick={CerrarTicket}
-                                    >
-                                       Pagar
+                                        <Button
+                                            type="submit"
+                                            fullWidth
+                                            variant="contained"
+                                            color="primary"
+                                            className={classes.submit}
+                                            onClick={() => pagar(datos_tickets.item[0].ticket_id)}
+                                        >
+                                            Pagar
                                 </Button>
-                            </FormControl>
-                            </DialogContent>
+                                    </FormControl>
+                                </DialogContent>
 
-                        </Dialog>
-                    </Paper>
+                            </Dialog>
+                        </Paper>
+                    }
                 </Grid>
             </Grid>
         </div>
 
     );
 }
+//Indica que debe recibir una variable de tipo String llamada Patente y es requerida
+CerrarTicket.propTypes = {
+    patente: PropTypes.string.isRequired
+};
 export default CerrarTicket;

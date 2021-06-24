@@ -4,13 +4,21 @@ import { alertActions } from ".";
 import { history } from "../helpers";
 
 export const ticketActions = {
+  fetchState,//estado inicial
+  fetchStateCerrarTicket,
   tickets_abiertos,
   tickets_list,
   cambiar_patente,
-  ingresar_patente,
-  fetchState
+  ingresar_patente,  
+  sacar_patente,
+  pagar,
 };
-
+function fetchState(){
+  return {type: 'FETCH_STATE'}
+}
+function fetchStateCerrarTicket(){
+  return {type: 'FETCH_STATE_CERRAR_TICKET'}
+}
 function tickets_abiertos(empresa_id) {
   return (dispatch) => {
     dispatch(request());
@@ -113,6 +121,54 @@ function ingresar_patente(empresa_id, patente, username) {
     return { type: ticketConstants.INGRESAR_PATENTE_FAILURE, error };
   }
 }
-function fetchState(){
-  return {type: 'FETCH_STATE'}
+function sacar_patente(empresa_id, patente) {
+  return (dispatch) => {
+    dispatch(request());
+    ticketService.sacar_patente(empresa_id, patente).then(
+      (tickets) => {
+        dispatch(success(tickets));
+        //dispatch(alertActions.success("Patente Ingresada Correctamente"));
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() {
+    return { type: ticketConstants.SACAR_PATENTE_REQUEST };
+  }
+  function success(tickets) {
+    return { type: ticketConstants.SACAR_PATENTE_SUCCESS, tickets };
+  }
+  function failure(error) {
+    return { type: ticketConstants.SACAR_PATENTE_FAILURE, error };
+  }
+}
+function pagar(empresa_id, ticket_id,username,emisor_dte) {
+  return (dispatch) => {
+    dispatch(request());
+    ticketService.pagar(empresa_id, ticket_id,username,emisor_dte).then(
+      (tickets) => {
+        dispatch(success(tickets));
+        dispatch(alertActions.success("Patente Pagada Correctamente"));
+        
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() {
+    return { type: ticketConstants.PAGAR_REQUEST };
+  }
+  function success(tickets) {
+    return { type: ticketConstants.PAGAR_SUCCESS, tickets };
+  }
+  function failure(error) {
+    return { type: ticketConstants.PAGAR_FAILURE, error };
+  }
 }

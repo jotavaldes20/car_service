@@ -1,17 +1,14 @@
-import React, { useRef,useState, useEffect } from 'react';
+import React, { Fragment,useRef,useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import { green } from '@material-ui/core/colors';
 import InputMask from 'react-text-mask';
 import { FormControl, InputLabel, OutlinedInput } from '@material-ui/core';
 import Loader from '../Loader/Loader';
 import { ticketActions } from "../../actions";
-import { Fragment } from 'react';
 import CerrarTicket from "./CerrarTicket"
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,30 +48,18 @@ const NewTicket = () => {
     const dispatch = useDispatch();
     const ingreso = useSelector(state => state.ingresar_patente);
     const {empresa_id,username}=useSelector(state => state.authentication.user);
-    const [valueIngreso,setValueIngreso]=useState("")
     const [patenteSalida,setpatenteSalida]=useState("")
     function IngresarPatente(e) {
         e.preventDefault();
         if(!valueRef.current.value==""){
             dispatch(ticketActions.ingresar_patente(empresa_id,valueRef.current.value,username));
-            console.log(ingreso)
-            console.log(ingreso.success)
             if(ingreso.success){
                 //setear valor del input
             }            
         }
 
     }
-    function SacarPatente(e) {
-        e.preventDefault();
-        alert(valueRef.current.value)
-        /*if(!valueRef.current.value==""){
-            dispatch(ticketActions.cambiar_patente(empresa_id,valueRef.current.value,id));
-        }*/
-
-    }
-    
-    function patenteSalidaChange(event){
+    const patenteSalidaChange=(event)=>{
         setpatenteSalida(event.target.value)
     }
     useEffect(() => {
@@ -111,6 +96,7 @@ const NewTicket = () => {
                         />
                         <br/>
                         <Button
+                            id="ingresar"
                             type="submit"
                             fullWidth
                             variant="contained"

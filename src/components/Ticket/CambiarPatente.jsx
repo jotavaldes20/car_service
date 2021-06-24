@@ -132,4 +132,8 @@ const CambiarPatente = ({ id, ...props }) => {
 
     );
 }
+//Indica que debe recibir una variable de tipo String llamada Patente y es requerida
+CambiarPatente.propTypes = {
+    patente: PropTypes.string.isRequired
+};
 export default CambiarPatente
