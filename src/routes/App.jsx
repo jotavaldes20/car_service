@@ -1,4 +1,4 @@
-import React, { useEffect, useState,Suspense, lazy } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Router, Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 //useSelector es un Hook que nos permite extraer datos del store de Redux utilizando una función selectora, 
@@ -15,16 +15,22 @@ import WarningIcon from '@material-ui/icons/Warning';
 import InfoIcon from '@material-ui/icons/Info';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import HomePage from '../containers/HomePage';
+//import HomePage from '../containers/HomePage';
 import LoginPage from '../components/LoginPage/LoginPage.jsx';
 //Mensajes
 import Mensajes from '../components/Mensajes/Mensajes'
-import NotFound from '../components/NotFound/NotFound';
-import TicketsAbiertos from '../components/Ticket/TicketsAbiertos'
-import TicketsList from '../components/Ticket/TicketList'
-import Loader from '../components/Loader/Loader';
+//import NotFound from '../components/NotFound/NotFound';
+//import TicketsAbiertos from '../components/Ticket/TicketsAbiertos'
+//import TicketsList from '../components/Ticket/TicketList'
 //import NewTicket from '../components/Ticket/NewTicket'
+import Loader from '../components/Loader/Loader';
+const HomePage = lazy(() => import('../containers/HomePage'));
 const NewTicket = lazy(() => import('../components/Ticket/NewTicket'))
+//const LoginPage = lazy(() => import('../components/LoginPage/LoginPage'))
+const NotFound = lazy(() => import('../components/NotFound/NotFound'))
+const TicketsAbiertos = lazy(() => import('../components/Ticket/TicketsAbiertos'))
+const TicketsList = lazy(() => import('../components/Ticket/TicketList'))
+
 const App = () => {
     const alert = useSelector(state => state.alert);
     const [tipoMensaje, setTipoMensaje] = useState("success")
@@ -115,25 +121,26 @@ const App = () => {
                 pauseOnHover
             />
             <Mensajes message={message} variant={tipoMensaje} openMensaje={openMensaje} />
+
             <Router history={history}>
-                <Switch>
-                <Suspense fallback ={
-          <div>
-            <Loader />
-          </div>
-        }>
-                    <PrivateRoute exact path="/" component={HomePage} />{/*Pagina por defecto */}
-                    <PrivateRoute exact path="/HomePage" component={HomePage} />{/*Pagina por defecto */}
-                    <PrivateRoute exact path="/TicketsAbiertos" component={TicketsAbiertos} />{/*Lista de ticket Abiertos */}
-                    <PrivateRoute exact path="/TicketList" component={TicketsList} />{/*Lista de ticket LIST */}
-                    <PrivateRoute exact path="/NewTicket" component={NewTicket} />{/* New ticket and sacar ticket */}
-                    {/*<Route path="/register" component={RegisterPage} /> */}
-                    <Route path="/login" component={LoginPage} />
-                    </Suspense>
-                    <PrivateRoute component={NotFound} />
-              
-                </Switch>
+                <Suspense fallback={
+                    <div>
+                        <Loader />
+                    </div>
+                }>
+                    <Switch>
+                        <PrivateRoute exact path="/" component={HomePage} />{/*Pagina por defecto */}
+                        <PrivateRoute exact path="/HomePage" component={HomePage} />{/*Pagina por defecto */}
+                        <PrivateRoute exact path="/TicketsAbiertos" component={TicketsAbiertos} />{/*Lista de ticket Abiertos */}
+                        <PrivateRoute exact path="/TicketList" component={TicketsList} />{/*Lista de ticket LIST */}
+                        <PrivateRoute exact path="/NewTicket" component={NewTicket} />{/* New ticket and sacar ticket */}
+                        {/*<Route path="/register" component={RegisterPage} /> */}
+                        <Route path="/login" component={LoginPage} />
+                        <PrivateRoute component={NotFound} />
+                    </Switch>
+                </Suspense>
             </Router>
+
         </BrowserRouter>
     );
 }
