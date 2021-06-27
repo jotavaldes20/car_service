@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import _ from '../../@lodash';
+import _ from '../@lodash';
 
 function useForm(initialState, onSubmit)
 {

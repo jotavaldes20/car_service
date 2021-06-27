@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../helpers';
 import { alertActions } from '../actions';
-import { PrivateRoute } from '../components';
+import { PrivateRoute } from '../components/PrivateRoute';
 //import { RegisterPage } from '../RegisterPage';
 import ErrorIcon from '@material-ui/icons/Error'
 import SuccessIcon from '@material-ui/icons/CheckCircleOutline';
@@ -24,6 +24,7 @@ import Mensajes from '../components/Mensajes/Mensajes'
 //import TicketsList from '../components/Ticket/TicketList'
 //import NewTicket from '../components/Ticket/NewTicket'
 import Loader from '../components/Loader/Loader';
+import ErrorBoundary from '../components/ErrorBoundary';
 const HomePage = lazy(() => import('../containers/HomePage'));
 const NewTicket = lazy(() => import('../components/Ticket/NewTicket'))
 //const LoginPage = lazy(() => import('../components/LoginPage/LoginPage'))

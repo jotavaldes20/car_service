@@ -57,8 +57,13 @@ const NewTicket = () => {
                 //setear valor del input
             }            
         }
-
     }
+    function key_enter_entrada(e){
+        if (e.key === 'Enter') {
+            IngresarPatente(e)
+          }
+    }
+    
     const patenteSalidaChange=(event)=>{
         setpatenteSalida(event.target.value)
     }
@@ -93,6 +98,7 @@ const NewTicket = () => {
                             autoFocus
                             margin="dense"
                             labelWidth={100}
+                            onKeyDown={key_enter_entrada}
                         />
                         <br/>
                         <Button

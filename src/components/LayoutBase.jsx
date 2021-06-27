@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Footer from "../components/Footer/footer";
 import MenuHeader from "../components/Menu/Menu"
-import { Box, Container, Grid, Typography } from "@material-ui/core";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { Link } from "react-router-dom";
+import { Box, Container, Grid } from "@material-ui/core";
 const drawerWidth = 240;
 const headerHeight = 120;
 const useStyles = makeStyles((theme) => ({
