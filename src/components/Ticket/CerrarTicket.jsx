@@ -61,7 +61,6 @@ const CerrarTicket = (props) => {
     };
 
     const pagar=(ticket_id)=>{
-        alert(ticket_id)
         dispatch(ticketActions.pagar(empresa_id, ticket_id,username,emisor_dte))
         setOpen(!open);
     }
