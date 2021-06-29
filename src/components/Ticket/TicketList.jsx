@@ -85,7 +85,7 @@ const TicketList = () => {
                     <code>{text}</code>,con el objeto original. Esto Provocara un error de renderizado
                 </p>
                 <Grid container spacing={0}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} >
                         <h3>Lista Tickets Cerrados</h3>
                         {tickets.loading && <Loader />}
                     </Grid>

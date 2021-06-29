@@ -171,12 +171,12 @@ export const SignIn = () => {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
+                    <Link href="/contraseñaOlvidada" variant="body2">
                       ¿Se te olvidó tu contraseña?
                     </Link>
                   </Grid>
                   <Grid item>
-                    <Link href="#" variant="body2">
+                    <Link href="/registro" variant="body2">
                       {"¿No tienes una cuenta? Registrate"}
                     </Link>
                   </Grid>

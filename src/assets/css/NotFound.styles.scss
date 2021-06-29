@@ -23,8 +23,8 @@
 	
 	.code {
 		font-family: 'Alfa Slab One', cursive;
-		font-size: 144px;
-		height: 100vh;
+		font-size: 120px;
+		height: auto;
 		color: white;
 		width: 100%;
 		display: flex;
@@ -33,5 +33,26 @@
 		align-items: center;
 		background-size: cover;
 		justify-content: center;
+	}
+	.texto {
+		font-family: 'Alfa Slab One', cursive;
+		font-size: 50px;
+		height: auto;
+		color: white;
+		width: 100%;
+		display: flex;
+		text-align: center;
+		background-position-x: center;
+		background-position-y: center;
+		align-items: center;
+		background-size: cover;
+		justify-content: center;
+	}
+	.volver {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: 'pointer'
 	}
 }
