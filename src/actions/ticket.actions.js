@@ -1,7 +1,6 @@
 import { ticketConstants } from "../constants";
 import { ticketService } from "../services";
 import { alertActions } from ".";
-import { history } from "../helpers";
 
 export const ticketActions = {
   fetchState,//estado inicial
@@ -127,7 +126,6 @@ function sacar_patente(empresa_id, patente) {
     ticketService.sacar_patente(empresa_id, patente).then(
       (tickets) => {
         dispatch(success(tickets));
-        //dispatch(alertActions.success("Patente Ingresada Correctamente"));
       },
       (error) => {
         dispatch(failure(error.toString()));
