@@ -67,7 +67,7 @@ export default class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
+//el objeto que puede ser de diferentes tipos, objeto o array, ademas es requerido
 ErrorBoundary.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };
