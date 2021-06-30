@@ -128,7 +128,7 @@ var TicketList = function TicketList() {
       setText = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(user.empresa_id);
+    //console.log(user.empresa_id)
     var empresa_id = user.empresa_id;
     var user_id = user.user_id;
     dispatch(_actions__WEBPACK_IMPORTED_MODULE_3__.ticketActions.tickets_list(empresa_id, user_id));

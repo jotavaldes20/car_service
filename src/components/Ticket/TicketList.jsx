@@ -61,7 +61,7 @@ const TicketList = () => {
     const funcionError = { function: 'Error Provocado de manera manual' };
     const [text, setText] = useState(JSON.stringify(funcionError));
     useEffect(() => {
-        console.log(user.empresa_id)
+        //console.log(user.empresa_id)
         var empresa_id = user.empresa_id
         var user_id = user.user_id
         dispatch(ticketActions.tickets_list(empresa_id, user_id));

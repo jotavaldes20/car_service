@@ -7,7 +7,7 @@ export const userService = {
 };
 
 function login(username, password) { 
-  console.log(iniciar_sesion(username,password))
+  //console.log(iniciar_sesion(username,password))
   return axios({
     method: "get",
     url: iniciar_sesion(username,password),

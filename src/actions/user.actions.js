@@ -15,7 +15,7 @@ function login(username, password, from) {
     .then(
       user => {
         dispatch(success(user));  
-        console.log("from: ",from)      
+        //console.log("from: ",from)      
         history.push(from);
         dispatch(alertActions.success("Usuario Logeado"));
       },

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
 );
 const HomePage = () => {
   const user = useSelector((state) => state.authentication.user);
-  console.log("user: ", user);
+  //console.log("user: ", user);
   const classes = useStyles();
   return (
     <div className={classes.root}>
