@@ -7,7 +7,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import VerTicket from '../Ticket/VerTicket'
 import { ticketActions } from "../../actions";
 import Loader from "../Loader/Loader"
-import ErrorBoundary from "../ErrorBoundary";
+//import ErrorBoundary from "../ErrorBoundary";
 import { Button } from "@material-ui/core";
 const currencyFormatter = new Intl.NumberFormat('es-ES', {
     style: 'currency',
@@ -69,7 +69,7 @@ const TicketList = () => {
 
     return (
         <div className={classes.root}>
-            <ErrorBoundary>
+            {/* <ErrorBoundary>*/}
                 <Button
                     variant="contained"
                     color="secondary"
@@ -109,7 +109,7 @@ const TicketList = () => {
                         </Grid>
                     }
                 </Grid>
-            </ErrorBoundary>
+            {/*</ErrorBoundary> */}
         </div>
     )
 

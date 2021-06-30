@@ -19,15 +19,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import LoginPage from '../components/LoginPage/LoginPage.jsx';
 //Mensajes
 import Mensajes from '../components/Mensajes/Mensajes'
-//import NotFound from '../components/NotFound/NotFound';
-//import TicketsAbiertos from '../components/Ticket/TicketsAbiertos'
-//import TicketsList from '../components/Ticket/TicketList'
-//import NewTicket from '../components/Ticket/NewTicket'
 import Loader from '../components/Loader/Loader';
-import ErrorBoundary from '../components/ErrorBoundary';
 const HomePage = lazy(() => import('../containers/HomePage'));
 const NewTicket = lazy(() => import('../components/Ticket/NewTicket'))
-//const LoginPage = lazy(() => import('../components/LoginPage/LoginPage'))
 const NotFound = lazy(() => import('../components/NotFound/NotFound'))
 const TicketsAbiertos = lazy(() => import('../components/Ticket/TicketsAbiertos'))
 const TicketsList = lazy(() => import('../components/Ticket/TicketList'))
