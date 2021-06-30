@@ -12,9 +12,6 @@ if (process.env.NODE_ENV === "development") {
   middlewares.push(loggerMiddleware);
 }
 
-//const composeEnhanders = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-
 export const store = createStore(
     rootReducer,
     applyMiddleware(
