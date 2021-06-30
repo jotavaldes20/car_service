@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     // eslint-disable-next-line no-console
-    console.log({ error, errorInfo });
+    //console.log({ error, errorInfo });
     this.setState({ errorInfo });
   }
 
@@ -67,7 +67,7 @@ export default class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
+//el objeto que puede ser de diferentes tipos, objeto o array, ademas es requerido
 ErrorBoundary.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };

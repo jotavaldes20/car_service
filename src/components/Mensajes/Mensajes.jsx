@@ -29,9 +29,9 @@ const Mensajes = (props) => {
     return ( 
         openMensaje?      
         <div>
-            {alert.message && console.log("alerta: ",alert)
+            {/*alert.message && console.log("alerta: ",alert)
             
-            }
+    */}
              {/*<Button variant="contained" color="secondary" size="small"
                     style={{ margin: 6 }} onClick={abrirAlerta}>
                     Sacar Ticket

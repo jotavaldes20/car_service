@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import carServiceImg from "../../assets/img/solucion_app_carservice_verde.svg";
+import carServiceImg from "../../assets/img/solucion_app_carservice_verde.png";
 import { useSelector } from 'react-redux';
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
 );
 const HomePage = () => {
   const user = useSelector((state) => state.authentication.user);
-  console.log("user: ", user);
+  //console.log("user: ", user);
   const classes = useStyles();
   return (
     <div className={classes.root}>
