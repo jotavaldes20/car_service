@@ -66,10 +66,10 @@ Para poder arrancar el proyecto de manera local debido al empaquetamiento de rec
 *Creacion de usuario \
 *Creacion nuevo Estacionamientos \
 *Parametrizar Estacionamiento \
-*Funcionalidad de cambiar empresa(Estacionamiento)\
+*Funcionalidad de cambiar empresa(Estacionamiento)
 
 # Autor
-Jorge Valdés Cáceres
+Jorge Valdés Cáceres \
 [Rakidwam](https://www.rakidwam.cl/)
 
 
