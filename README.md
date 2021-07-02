@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Readme Car Service
+CarService, es un software de gestion de estacionamiento, que permite modernizar mediante la tecnologia la gestion del ingreso y salida y cobro por concepto del estacionamiento.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Link de despliegue en produccion Vercel-- [Car Service](https://car-service.vercel.app/).
+link https://car-service.vercel.app/(https://car-service.vercel.app/)
 
-## Available Scripts
+### `Credenciales de acceso` 
 
-In the project directory, you can run:
+Para efectos de prueba, se disponibilizo un usuario con un solo estacionamiento asignado\
+Usuario: jvaldes \
+Password: 12345678 
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `Principales Funciones` 
+*Login \
+*Ingresar Nuevo Ticket \
+*Cerrar Ticket \
+*Pagar Ticket \
+*Ver ticket abiertos, aqui se podra ver el ticket, cambiar patente y cerrar ticket\
+*VerTicket Cerrados. \
+*Cerrar Sesion 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `API CarService`
+La plataforma se conecta a la Api https://car.rakidwam.cl/car_service/api_rest/ \
+la API es de creacion propia de la empresa [Rakidwam](https://www.rakidwam.cl/) \
+Lo servicios rest son de creacion propia debido a eso aun no tiene documentacion en produccion. 
+La API al hacer login proporciona un token el cual es necesario para conectar a los diferentes endPoint disponibilizados por la API.
 
-### `yarn test`
+**Principales Servicios**
+`Login` \
+`IngresarTicket` \
+`SacarTicket` \
+`IngresarTicket` \
+`PagarTicket` \
+`ListAllTicket` \
+`TicketsAbiertos` \
+`CambiarPatente` 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Los servicios mencionados anteriormente son lo que ocupa CarService en ReactJs
 
-### `yarn build`
+### `Patron de Arquitectura`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+CarService esta diseñado bajo la arquitectura React Redux \
+Redux es un manejador de estados globales basado en el patron de diseño `FLUX` \
+Flux propone un flujo unidireccional de los datos y la necesidad de solicitar cambios en los mismos por medio de acciones \
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+En base a lo anterior es que la estructura de las carpetas y archivos toma un orden y estructura establecida que responda y facilite el entendimiento del protron redux. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `ErrorBoundary`
+En el sistema esta implementado el HOC de limite de erorres `ErrorBoundary` lo cual permite que cualquier error de JavaScript en una parte de la interfaz no rompa toda la aplicación \
+Los ErrorBoundary es un componente que capturan errores de JavaScript en cualquier parte de sus hijos, registran esos errores, y muestran una interfaz que se estime conveniente en vez de el error poco amigable que rompe la aplicación.\
+En en componente de `Lista Tickets Cerrados` se disponibilizo un boton el cual simula un error de renderizado para ver en accion el `ErrorBoundary`. 
+### `Prop-Types`
+Se utiliza prop-types para la verificaicon de tipos en las props de algun componente. \
+Cuando un valor invalido se asigna a una prop, muestra una advertencia en la consola, esto facilita para saber que tipo de dato pasar al componente.
 
-### `yarn eject`
+### `Despliegue de manera local `
+Para poder arrancar el proyecto de manera local debido al empaquetamiento de recursos con `WebPack y Babel` se deben ejecutar los siguientes comandos \
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`npm start` \
+`npm run build` \
+`npm run dev-server` 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `Mejoras Fututras` 
+*Dashboard para tickets \
+*Creacion de usuario \
+*Creacion nuevo Estacionamientos \
+*Parametrizar Estacionamiento \
+*Funcionalidad de cambiar empresa(Estacionamiento)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Autor
+Jorge Valdés Cáceres \
+[Rakidwam](https://www.rakidwam.cl/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
